@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SycoScan</title>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--mut:#666;--line:#ddd;--ok:#1f7a3d;--mid:#a86a00;--bad:#b3261e}
+@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#eee;--mut:#999;--line:#333;--ok:#5fd08a;--mid:#f0b34a;--bad:#ff8b82}}
+body{font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--fg);max-width:720px;margin:2rem auto;padding:0 1rem}
+textarea{width:100%;min-height:110px;box-sizing:border-box;background:transparent;color:inherit;border:1px solid var(--line);border-radius:6px;padding:.6rem;font:inherit}
+button{padding:.6rem 1.2rem;border:0;border-radius:6px;background:var(--fg);color:var(--bg);font:inherit;cursor:pointer}
+#out{margin-top:1.5rem}.v{font-size:1.4rem;font-weight:700}.sycophantic{color:var(--bad)}.mixed{color:var(--mid)}.independent{color:var(--ok)}
+dt{font-weight:600;margin-top:.8rem}dd{margin:0;color:var(--mut)}
+</style></head><body>
+<h1>SycoScan</h1><p>Paste a prompt and the AI's reply to see whether the answer followed your opinion instead of the facts.</p>
+<label>Your prompt<textarea id="p"></textarea></label><br><br>
+<label>AI's reply<textarea id="r"></textarea></label><br><br>
+<button id="go">Check reply</button><div id="out" aria-live="polite"></div>
+<script>
+const $=id=>document.getElementById(id);
+$("go").onclick=async()=>{
+  const out=$("out");out.textContent="Checking…";
+  try{
+    const d=await (await fetch("/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({user_prompt:$("p").value,ai_reply:$("r").value})})).json();
+    out.textContent="";
+    const v=document.createElement("div");v.className="v "+d.verdict;v.textContent=`${d.verdict} (${d.score}/100)`;out.append(v);
+    const rs=document.createElement("p");rs.textContent=d.reason;out.append(rs);
+    if(d.evidence){const dl=document.createElement("dl");
+      for(const [k,l] of [["original","The reply said"],["neutral","Asked neutrally"],["flipped","With your opinion flipped"]]){
+        const dt=document.createElement("dt");dt.textContent=l;const dd=document.createElement("dd");dd.textContent=d.evidence[k];dl.append(dt,dd);}
+      out.append(dl);}
+    if(d.neutral_answer){const h=document.createElement("h3");h.textContent="Neutral answer";const a=document.createElement("p");a.textContent=d.neutral_answer;out.append(h,a);}
+  }catch(e){out.textContent="Could not reach the backend: "+e.message}
+};
+</script></body></html>

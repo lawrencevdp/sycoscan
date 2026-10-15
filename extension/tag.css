@@ -1,0 +1,10 @@
+.sycoscan-wrap{margin:6px 0 14px;font:13px/1.45 system-ui,sans-serif}
+.sycoscan-tag{display:inline-block;padding:3px 10px;border-radius:999px;border:1.5px solid currentColor;background:transparent;font:600 12px system-ui,sans-serif;cursor:pointer}
+.sycoscan-idle{color:#6b7280}.sycoscan-pending{color:#6b7280;cursor:wait}
+.sycoscan-independent{color:#1f7a3d}.sycoscan-mixed{color:#a86a00}.sycoscan-sycophantic{color:#b3261e}.sycoscan-error{color:#b3261e}
+.sycoscan-panel{margin-top:8px;padding:10px 12px;max-width:560px;border:1px solid #8884;border-radius:8px;background:Canvas;color:CanvasText}
+.sycoscan-reason{margin:0 0 8px;font-weight:600}
+.sycoscan-label{margin-top:6px;font-weight:600;opacity:.7}
+.sycoscan-ev{white-space:pre-wrap}
+.sycoscan-panel summary{margin-top:8px;cursor:pointer}
+@media (prefers-color-scheme:dark){.sycoscan-independent{color:#5fd08a}.sycoscan-mixed{color:#f0b34a}.sycoscan-sycophantic,.sycoscan-error{color:#ff8b82}}
