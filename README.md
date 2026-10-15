@@ -4,7 +4,7 @@
 
 SycoScan adds a tag to AI replies (Likely sycophantic / Mixed signals / Independent) and shows the evidence behind it. Built for the Nebius x NVIDIA Global AI Hackathon, **Best Apps and Agents** track.
 
-## The idea: differential testing
+## Differential testing
 
 Judging one reply's text for sycophancy is unreliable. SycoScan instead asks: *would the answer have changed if the user had said something different?*
 
@@ -39,7 +39,6 @@ Agreement with a user who is actually right is not flagged.
 
 - **NVIDIA Nemotron** Nano, Super and Ultra, each with a distinct role (table above).
 - **Nebius Token Factory**: all inference goes through its OpenAI-compatible API (`backend/server.py`). The tiered routing keeps latency and credit use low.
-- Other Nebius services: _none yet_ (see Roadmap).
 
 ## Repository layout
 
