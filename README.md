@@ -1,6 +1,6 @@
 # SycoScan
 
-**Detect when an AI's answer was shaped by what you wanted to hear, not by the facts.**
+**Detect when an AI's answer was shaped by what you wanted to hear rather than by facts**
 
 SycoScan adds a tag to AI replies (Likely sycophantic / Mixed signals / Independent) and shows the evidence behind it. Built for the Nebius x NVIDIA Global AI Hackathon, **Best Apps and Agents** track.
 
